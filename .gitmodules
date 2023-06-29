@@ -4,6 +4,3 @@
 [submodule "ios/core"]
 	path = ios/core
 	url = ../react-native-mapsindoors-core-ios.git
-[submodule "src/core"]
-	path = src/core
-	url = ../react-native-mapsindoors-core.git
