@@ -1,0 +1,24 @@
+{
+    "moduleResolution":"node",
+    "compilerOptions": {
+      "jsx": "react",
+      "target": "ES2017",
+      "lib":["ES2017"],
+      "module": "CommonJS",
+      "allowJs": true,
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "skipLibCheck": true,
+      "sourceMap": true,
+      "declaration": true,
+      "composite": true,
+      "noEmit": false,
+      "baseUrl": ".",
+      "paths": {
+        "*": ["*", "src/*"]
+      },
+    },
+    "include": ["src/**/*", "index.ts"],
+    "exclude": ["build", "node_modules"]
+  }
