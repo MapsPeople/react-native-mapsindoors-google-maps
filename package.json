@@ -1,7 +1,7 @@
 {
     "name": "@mapsindoors/react-native-maps-indoors-google-maps",
     "title": "React Native MapsIndoors Google maps",
-    "version": "0.0.9-beta1",
+    "version": "1.0.0",
     "description": "React Native MapsIndoors component with google",
     "react-native": "index.ts",
     "files": [
@@ -18,8 +18,8 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/github_account/react-native-maps-indoors.git",
-        "baseUrl": "https://github.com/github_account/react-native-maps-indoors"
+        "url": "git+https://github.com/MapsPeople/react-native-mapsindoors-google-maps.git",
+        "baseUrl": "https://github.com/MapsPeople/react-native-mapsindoors-google-maps"
     },
     "keywords": [
         "react-native",
@@ -48,6 +48,6 @@
         "typescript": "^5.0.4"
     },
     "bugs": {
-        "url": "https://github.com/github_account/react-native-maps-indoors/issues"
+        "url": "https://github.com/MapsPeople/react-native-mapsindoors-google-maps/issues"
     }
 }

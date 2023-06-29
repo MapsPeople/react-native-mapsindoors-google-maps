@@ -75,6 +75,10 @@ allprojects {
 
 ## Usage
 
+### Reference docs
+
+[Reference Documentation](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/1.0.0/index.html)
+
 ### Showing your map
 
 This snippet shows you how to set up MapsIndoors in a React Native application.
