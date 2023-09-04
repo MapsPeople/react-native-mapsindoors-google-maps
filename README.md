@@ -1,8 +1,12 @@
-# react-native-maps-indoors
+# react-native-maps-indoors-google-maps
+
+## Documentation
+
+Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/1.0.2/index.html) to get an overview of what the MapsIndoors SDK offers.
 
 ## Getting started
 
-`$ npm install react-native-maps-indoors`
+`$ npm install @mapsindoors/react-native-maps-indoors-google-maps`
 
 ### iOS
 
@@ -74,10 +78,6 @@ allprojects {
 ```
 
 ## Usage
-
-### Reference docs
-
-[Reference Documentation](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/1.0.0/index.html)
 
 ### Showing your map
 
