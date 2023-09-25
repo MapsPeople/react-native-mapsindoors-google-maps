@@ -1,7 +1,7 @@
 {
     "name": "@mapsindoors/react-native-maps-indoors-google-maps",
     "title": "React Native MapsIndoors Google maps",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "React Native MapsIndoors component with google",
     "react-native": "index.ts",
     "files": [
