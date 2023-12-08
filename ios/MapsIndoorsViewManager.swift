@@ -86,4 +86,5 @@ struct GoogleMapsView: RCMapView {
 
         return update
     }
+
 }
