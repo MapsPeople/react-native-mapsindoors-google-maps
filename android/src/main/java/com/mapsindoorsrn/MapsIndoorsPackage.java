@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.mapsindoorsrn;
 
 import androidx.annotation.NonNull;
 
@@ -12,12 +12,12 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.reactlibrary.core.DirectionsRendererModule;
-import com.reactlibrary.core.DirectionsServiceModule;
-import com.reactlibrary.core.MPDisplayRuleModule;
-import com.reactlibrary.core.MapControlModule;
-import com.reactlibrary.core.MapsIndoorsModule;
-import com.reactlibrary.core.UtilsModule;
+import com.mapsindoorsrn.core.DirectionsRendererModule;
+import com.mapsindoorsrn.core.DirectionsServiceModule;
+import com.mapsindoorsrn.core.MPDisplayRuleModule;
+import com.mapsindoorsrn.core.MapControlModule;
+import com.mapsindoorsrn.core.MapsIndoorsModule;
+import com.mapsindoorsrn.core.UtilsModule;
 
 public class MapsIndoorsPackage implements ReactPackage, OnMapReadyCallback {
     private MapControlModule mapControlModule;

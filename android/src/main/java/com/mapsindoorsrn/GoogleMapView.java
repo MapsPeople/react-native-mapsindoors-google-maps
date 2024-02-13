@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.mapsindoorsrn;
 
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -15,9 +15,9 @@ import com.mapsindoors.core.MPIMapConfig;
 import com.mapsindoors.core.MPPoint;
 import com.mapsindoors.core.OnResultReadyListener;
 import com.mapsindoors.googlemaps.MPMapConfig;
-import com.reactlibrary.core.RCMapView;
-import com.reactlibrary.core.models.MPCameraPosition;
-import com.reactlibrary.core.models.MPCameraUpdate;
+import com.mapsindoorsrn.core.RCMapView;
+import com.mapsindoorsrn.core.models.MPCameraPosition;
+import com.mapsindoorsrn.core.models.MPCameraUpdate;
 
 public class GoogleMapView implements RCMapView {
     private GoogleMap mMap;

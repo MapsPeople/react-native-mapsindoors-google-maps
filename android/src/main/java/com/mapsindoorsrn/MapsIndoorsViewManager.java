@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.mapsindoorsrn;
 
 import android.view.Choreographer;
 import android.view.View;
