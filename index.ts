@@ -9,6 +9,9 @@ import MPFilter from './src/core/MPFilter';
 import MPBounds from './src/core/MPBounds';
 import { MPLocationType } from './src/core/MPLocationType';
 import { MPLocationPropertyNames } from './src/core/MPLocationPropertyNames';
+import { MPLabelType } from './src/core/MPLabelType';
+import { MPIconPlacement } from './src/core/MPIconPlacement';
+import { MPBadgePosition } from './src/core/MPBadgePosition';
 import MPPolygon from './src/core/MPPolygon';
 import MPMapStyle from './src/core/MPMapStyle';
 import MPBuilding from './src/core/MPBuilding';
@@ -37,6 +40,7 @@ import MPDirectionsService from './src/core/MPDirectionsService';
 import { MPCameraViewFitMode } from './src/core/MPCameraViewFitMode';
 import MPCameraPosition from './src/core/MPCameraPosition';
 import MPFilterBehavior from './src/core/MPFilterBehavior';
+import MPHighlightBehavior from 'src/core/MPHighlightBehavior';
 import MPSolutionConfig from './src/core/MPSolutionConfig';
 import { OnMapClickListener } from './src/core/OnMapClickListener';
 import MPSelectionBehavior from './src/core/MPSelectionBehavior';
@@ -85,6 +89,7 @@ import { MPCameraPositionParams } from './src/core/MPCameraPosition';
 import { MPFilterBehaviorParams } from './src/core/MPFilterBehavior';
 import { MPSolutionConfigParams } from './src/core/MPSolutionConfig';
 import { MPRouteCoordinateParams } from './src/core/MPRouteCoordinate';
+import { MPHighlightBehaviorParams } from 'src/core/MPHighlightBehavior';
 import  MapView  from './src/core/MapView';
 
 
@@ -103,6 +108,7 @@ export {
     MPError,
     MPFilter,
     MPFilterBehavior,
+    MPHighlightBehavior,
     MPSelectionBehavior,
     MPFloor,
     MPPoint,
@@ -136,6 +142,9 @@ export {
     MPCategoryCollection,
     MPUserRoleCollection,
     MPHighway,
+    MPBadgePosition,
+    MPIconPlacement,
+    MPLabelType,
     MapView
 }; 
 
@@ -178,6 +187,7 @@ export type {
     MPRoutePropertyParams,
     MPCameraPositionParams,
     MPFilterBehaviorParams,
+    MPHighlightBehaviorParams,
     MPSolutionConfigParams,
     MPRouteCoordinateParams
 };
