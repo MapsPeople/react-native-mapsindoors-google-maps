@@ -17,14 +17,14 @@ Pod::Spec.new do |s|
   # optional - use expanded license entry instead:
   # s.license    = { :type => "MIT", :file => "LICENSE" }
   s.authors      = { 'MapsPeople' => 'info@mapspeople.com' }
-  s.platforms    = { :ios => "13.0" }
+  s.platforms    = { :ios => "14.0" }
   s.source       = { :git => "https://github.com/github_account/react-native-maps-indoors-google-maps.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,cc,cpp,m,mm,swift}"
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "MapsIndoorsGoogleMaps", "4.3.2"
-  s.dependency "MapsIndoorsCodable", "4.3.2"
+  s.dependency "MapsIndoorsGoogleMaps", "4.5.15"
+  s.dependency "MapsIndoorsCodable", "4.5.15"
 end
 

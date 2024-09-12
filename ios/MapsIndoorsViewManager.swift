@@ -14,6 +14,7 @@ class MapsIndoorsViewManager : RCTViewManager {
         let gmsMapView = GMSMapView(frame: .zero, camera: aalborgCam)
 
         let googleMapsView = GoogleMapsView(gmsMapView: gmsMapView)
+        MapsIndoorsData.reset()
         MapsIndoorsData.sharedInstance.mapView = googleMapsView
         return gmsMapView
     }
@@ -22,7 +23,7 @@ class MapsIndoorsViewManager : RCTViewManager {
     }
 }
 
-struct GoogleMapsView: RCMapView {
+class GoogleMapsView: RCMapView {
     func animateCamera(cameraUpdate: CameraUpdate, duration: Int) throws {
         Task {@MainActor in
             let gmsCameraUpdate: GMSCameraUpdate
@@ -47,16 +48,25 @@ struct GoogleMapsView: RCMapView {
         }
     }
     
-    func getConfig() -> MapsIndoors.MPMapConfig {
+    func getConfig(config: NSDictionary) -> MPMapConfig {
         return MPMapConfig(gmsMapView: googleMapsView, googleApiKey: "")
     }
     
     private let googleMapsView: GMSMapView
-    
+    private var mMapControl: MPMapControl? = nil
+
     init(gmsMapView: GMSMapView) {
         googleMapsView = gmsMapView
     }
     
+    internal func getMapControl() -> MPMapControl? {
+        return mMapControl
+    }
+    
+    func setMapControl(mapControl: any MapsIndoors.MPMapControl) {
+        mMapControl = mapControl
+    }
+
     private func makeGMSCameraUpdate(cameraUpdate: CameraUpdate) throws -> GMSCameraUpdate {
         let update: GMSCameraUpdate
 
@@ -79,7 +89,13 @@ struct GoogleMapsView: RCMapView {
             guard let position = cameraUpdate.position else {
                 throw CameraUpdateError.missingField("fromCameraPosition", "position")
             }
-            update = (GMSCameraUpdate.setCamera(GMSCameraPosition(latitude: CLLocationDegrees(cameraUpdate.position!.target.latitude), longitude: CLLocationDegrees(position.target.longitude), zoom: position.zoom, bearing: CLLocationDirection(floatLiteral: Double(position.bearing)), viewingAngle: Double(position.tilt)) ))
+            update = GMSCameraUpdate.setCamera(
+                GMSCameraPosition(latitude: CLLocationDegrees(position.target.latitude),
+                longitude: CLLocationDegrees(position.target.longitude),
+                zoom: position.zoom,
+                bearing: CLLocationDirection(floatLiteral: Double(position.bearing)),
+                viewingAngle: Double(position.tilt))
+                )
         default:
             throw CameraUpdateError.unknownMode(cameraUpdate.mode)
         }
