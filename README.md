@@ -2,7 +2,7 @@
 
 ## Documentation
 
-Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/1.0.8/index.html) to get an overview of what the MapsIndoors SDK offers.
+Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.0.7/index.html) to get an overview of what the MapsIndoors SDK offers.
 
 ## Getting started
 
@@ -10,10 +10,10 @@ Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/refe
 
 ### iOS
 
-The MapsIndoors SDK requires iOS 13, so make sure that your podfile is configured for iOS 13
+The MapsIndoors SDK requires iOS 14, so make sure that your podfile is configured for iOS 14
 
 ```pod
-platform :ios, '13.0
+platform :ios, '14.0
 ```
 
 #### Providing API key
@@ -74,6 +74,38 @@ allprojects {
         mavenCentral()
         maven { url 'https://maven.mapsindoors.com/' }
     }
+}
+```
+
+### Expo
+
+This library includes an expo plugin to support native integration.
+To enable it, you need to add the configuration in your expo configuration.
+
+```json
+// app.json
+
+{
+  "expo": {
+    // ... your configuration
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "14.0"
+          }
+        }
+      ],
+      [
+        "@mapsindoors/react-native-maps-indoors-google-maps/app.plugin.js",
+        {
+          "apiKeyAndroid": "GMAPS_ANDROID_API_KEY",
+          "apiKeyIOS": "GMAPS_IOS_API_KEY"
+        }
+      ]
+    ]
+  }
 }
 ```
 

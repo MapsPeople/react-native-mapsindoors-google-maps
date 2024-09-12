@@ -40,7 +40,7 @@ import MPDirectionsService from './src/core/MPDirectionsService';
 import { MPCameraViewFitMode } from './src/core/MPCameraViewFitMode';
 import MPCameraPosition from './src/core/MPCameraPosition';
 import MPFilterBehavior from './src/core/MPFilterBehavior';
-import MPHighlightBehavior from 'src/core/MPHighlightBehavior';
+import MPHighlightBehavior from './src/core/MPHighlightBehavior';
 import MPSolutionConfig from './src/core/MPSolutionConfig';
 import { OnMapClickListener } from './src/core/OnMapClickListener';
 import MPSelectionBehavior from './src/core/MPSelectionBehavior';
@@ -64,6 +64,9 @@ import MPBuildingCollection from './src/core/MPBuildingCollection';
 import MPVenueCollection from './src/core/MPVenueCollection';
 import MPCategoryCollection from './src/core/MPCategoryCollection';
 import MPUserRoleCollection from './src/core/MPUserRoleCollection';
+import MPRouteStopIconConfig from './src/core/MPRouteStopIconConfig';
+import MPLabelGraphic from './src/core/MPLabelGraphic';
+import MPPOIType from './src/core/MPPOIType';
 import { MPHighway } from './src/core/MPHighway';
 import { MPFloorParams } from './src/core/MPFloor';
 import { MPQueryParams } from './src/core/MPQuery';
@@ -89,7 +92,14 @@ import { MPCameraPositionParams } from './src/core/MPCameraPosition';
 import { MPFilterBehaviorParams } from './src/core/MPFilterBehavior';
 import { MPSolutionConfigParams } from './src/core/MPSolutionConfig';
 import { MPRouteCoordinateParams } from './src/core/MPRouteCoordinate';
-import { MPHighlightBehaviorParams } from 'src/core/MPHighlightBehavior';
+import { MPHighlightBehaviorParams } from './src/core/MPHighlightBehavior';
+import { RouteStopIconConfig } from './src/core/RouteStopIconConfig';
+import { MPRouteStopIconConfigParams } from './src/core/MPRouteStopIconConfig';
+import { MPPOITypeParams } from './src/core/MPPOIType';
+import { MPSelectionMode } from './src/core/MPSelectionMode'; 
+import { MPFeatureType } from './src/core/MPFeatureTypes';
+
+
 import  MapView  from './src/core/MapView';
 
 
@@ -145,6 +155,11 @@ export {
     MPBadgePosition,
     MPIconPlacement,
     MPLabelType,
+    MPRouteStopIconConfig,
+    MPSelectionMode,
+    MPFeatureType,
+    MPLabelGraphic,
+    MPPOIType,
     MapView
 }; 
 
@@ -189,5 +204,8 @@ export type {
     MPFilterBehaviorParams,
     MPHighlightBehaviorParams,
     MPSolutionConfigParams,
-    MPRouteCoordinateParams
+    MPRouteCoordinateParams,
+    MPRouteStopIconConfigParams,
+    RouteStopIconConfig,
+    MPPOITypeParams
 };
