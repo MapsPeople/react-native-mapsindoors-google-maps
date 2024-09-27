@@ -8,18 +8,41 @@ import GoogleMaps
 @objc(MapsIndoorsViewManager)
 class MapsIndoorsViewManager : RCTViewManager {
     @objc override static func requiresMainQueueSetup() -> Bool {return false}
+    
+    var mapView: GMSMapView? = nil
 
     override func view() -> UIView! {
         let aalborgCam = GMSCameraPosition(latitude: 57.04, longitude: 9.9217, zoom: 11.25)
-        let gmsMapView = GMSMapView(frame: .zero, camera: aalborgCam)
+        mapView = GMSMapView(frame: .zero, camera: aalborgCam)
 
-        let googleMapsView = GoogleMapsView(gmsMapView: gmsMapView)
+        let gMapView = GoogleMapsView(gmsMapView: mapView!)
         MapsIndoorsData.reset()
-        MapsIndoorsData.sharedInstance.mapView = googleMapsView
-        return gmsMapView
+        MapsIndoorsData.sharedInstance.mapView = gMapView
+        return mapView!
     }
 
-    @objc func create(_ node: NSNumber, nodeAgain: NSNumber) {
+    @objc func create(_ node: NSNumber, nodeAgain: NSNumber, camera: String, showCompass: Bool) {
+        let decoder = JSONDecoder()
+        
+        DispatchQueue.main.async {
+            self.mapView?.settings.compassButton = showCompass
+        }
+        
+        guard let position = try? decoder.decode(CameraPosition.self, from: camera.data(using: .utf8)!) else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let update = GMSCameraUpdate.setCamera(
+                GMSCameraPosition(latitude: CLLocationDegrees(position.target.latitude),
+                longitude: CLLocationDegrees(position.target.longitude),
+                zoom: position.zoom,
+                bearing: CLLocationDirection(floatLiteral: Double(position.bearing)),
+                viewingAngle: Double(position.tilt))
+            )
+                
+            self.mapView?.moveCamera(update)
+        }
     }
 }
 

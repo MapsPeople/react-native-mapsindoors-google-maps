@@ -5,5 +5,7 @@
 RCT_EXTERN_METHOD(requiresMainQueueSetup)
 
     RCT_EXTERN_METHOD(create:(nonnull NSNumber) node
-                      nodeAgain:(nonnull NSNumber) nodeAgain)
+                  nodeAgain:(nonnull NSNumber) nodeAgain
+                  camera: (NSString*) camera
+                  showCompass: (BOOL) showCompass)
 @end
