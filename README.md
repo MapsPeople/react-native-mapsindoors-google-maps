@@ -2,7 +2,7 @@
 
 ## Documentation
 
-Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.0.7/index.html) to get an overview of what the MapsIndoors SDK offers.
+Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.1.0/index.html) to get an overview of what the MapsIndoors SDK offers.
 
 ## Getting started
 

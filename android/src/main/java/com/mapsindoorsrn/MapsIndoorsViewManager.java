@@ -15,8 +15,14 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactPropGroup;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+import com.mapsindoorsrn.core.models.MPCameraPosition;
 
 import java.util.Map;
 
@@ -28,6 +34,10 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
     private int propHeight;
 
     private View view;
+    private MPCameraPosition cameraPosition = null;
+    private Boolean showCompass = null;
+
+    private Gson gson = new Gson();
 
     ReactApplicationContext mReactContext;
     OnMapReadyCallback mOnMapReadyCallback;
@@ -65,6 +75,14 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
 
         if (commandIdInt == COMMAND_CREATE) {
             createMapFragment(root, reactNativeViewId);
+
+            if (!args.isNull(1)) {
+                cameraPosition = gson.fromJson(args.getString(1), MPCameraPosition.class);
+            }
+
+            if (!args.isNull(2)) {
+                showCompass = args.getBoolean(2);
+            }
         }
     }
 
@@ -81,6 +99,21 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
                 .commit();
 
         mapFragment.getMapAsync(googleMap -> {
+            if (cameraPosition != null) {
+                CameraPosition currentCameraPosition = googleMap.getCameraPosition();
+                CameraPosition camPos = CameraPosition.builder()
+                        .zoom(cameraPosition.zoom != null ? cameraPosition.zoom : currentCameraPosition.zoom)
+                        .bearing(cameraPosition.bearing != null ? cameraPosition.bearing : currentCameraPosition.bearing)
+                        .target(new LatLng(cameraPosition.target.getLat(), cameraPosition.target.getLng()))
+                        .tilt(cameraPosition.tilt != null ? cameraPosition.tilt : currentCameraPosition.tilt)
+                        .build();
+                googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camPos));
+            }
+
+            if (showCompass != null) {
+                googleMap.getUiSettings().setCompassEnabled(showCompass);
+            }
+
             mOnMapReadyCallback.onMapReady(googleMap);
         });
     }
