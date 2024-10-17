@@ -23,8 +23,10 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,c,cc,cpp,m,mm,swift}"
   s.requires_arc = true
 
+  s.static_framework = true
+
   s.dependency "React"
-  s.dependency "MapsIndoorsGoogleMaps", "4.5.15"
-  s.dependency "MapsIndoorsCodable", "4.5.15"
+  s.dependency "MapsIndoorsGoogleMaps", "4.6.1"
+  s.dependency "MapsIndoorsCodable", "4.6.1"
 end
 
