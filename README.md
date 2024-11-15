@@ -2,7 +2,7 @@
 
 ## Documentation
 
-Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.1.0/index.html) to get an overview of what the MapsIndoors SDK offers.
+Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.1.2/index.html) to get an overview of what the MapsIndoors SDK offers.
 
 ## Getting started
 
@@ -24,7 +24,9 @@ platform :ios, '14.0
 
 #### Adding MapsIndoors script specific to Google Maps, to Podfile
 
-After this you should navigate into the iOS folder of your flutter project and add this script to the applications Podfile: [MapsIndoors podfile Post install](https://github.com/MapsIndoors/MapsIndoorsIOS/wiki/Podfile-post_install-v4)
+**Note from version 2.1.1 this is no longer necessary, and should be removed from the podfile if upgrading to 2.1.1**
+
+After this you should navigate into the iOS folder of your react native project and add this script to the applications Podfile: [MapsIndoors podfile Post install](https://github.com/MapsIndoors/MapsIndoorsIOS/wiki/Podfile-post_install-v4)
 
 ### Android
 
