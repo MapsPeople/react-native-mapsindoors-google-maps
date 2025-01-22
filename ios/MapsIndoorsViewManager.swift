@@ -21,7 +21,7 @@ class MapsIndoorsViewManager : RCTViewManager {
         return mapView!
     }
 
-    @objc func create(_ node: NSNumber, nodeAgain: NSNumber, camera: String, showCompass: Bool) {
+    @objc func create(_ node: NSNumber, nodeAgain: NSNumber, camera: String, showCompass: Bool, mapboxMapStyle: String?) {
         let decoder = JSONDecoder()
         
         DispatchQueue.main.async {
