@@ -7,7 +7,7 @@ import GoogleMaps
 
 @objc(MapsIndoorsViewManager)
 class MapsIndoorsViewManager : RCTViewManager {
-    @objc override static func requiresMainQueueSetup() -> Bool {return false}
+    @objc override static func requiresMainQueueSetup() -> Bool {return true}
     
     var mapView: GMSMapView? = nil
 

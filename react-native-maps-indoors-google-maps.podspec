@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   # optional - use expanded license entry instead:
   # s.license    = { :type => "MIT", :file => "LICENSE" }
   s.authors      = { 'MapsPeople' => 'info@mapspeople.com' }
-  s.platforms    = { :ios => "14.0" }
+  s.platforms    = { :ios => "15.6" }
   s.source       = { :git => "https://github.com/github_account/react-native-maps-indoors-google-maps.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,cc,cpp,m,mm,swift}"
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency "React"
-  s.dependency "MapsIndoorsGoogleMaps", "4.9.1"
-  s.dependency "MapsIndoorsCodable", "4.9.1"
+  s.dependency "MapsIndoorsGoogleMaps", "4.15.5"
+  s.dependency "MapsIndoorsCodable", "4.15.5"
 end
 
