@@ -2,7 +2,7 @@
 
 ## Documentation
 
-Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.3.0/index.html) to get an overview of what the MapsIndoors SDK offers.
+Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.6.0/index.html) to get an overview of what the MapsIndoors SDK offers.
 
 ## Getting started
 
@@ -10,10 +10,10 @@ Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/refe
 
 ### iOS
 
-The MapsIndoors SDK requires iOS 14, so make sure that your podfile is configured for iOS 14
+The MapsIndoors SDK requires iOS 15.6, so make sure that your podfile is configured for iOS 15.6
 
 ```pod
-platform :ios, '14.0
+platform :ios, '15.6
 ```
 
 #### Providing API key
@@ -95,7 +95,7 @@ To enable it, you need to add the configuration in your expo configuration.
         "expo-build-properties",
         {
           "ios": {
-            "deploymentTarget": "14.0"
+            "deploymentTarget": "15.6"
           }
         }
       ],

@@ -67,6 +67,25 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
     }
 
     @Override
+    public void receiveCommand(@NonNull MapView root, int commandId, @Nullable ReadableArray args) {
+        super.receiveCommand(root, commandId, args);
+        assert args != null;
+        int reactNativeViewId = args.getInt(0);
+
+        if (commandId == COMMAND_CREATE) {
+            createMapFragment(root, reactNativeViewId);
+
+            if (!args.isNull(1)) {
+                cameraPosition = gson.fromJson(args.getString(1), MPCameraPosition.class);
+            }
+
+            if (!args.isNull(2)) {
+                showCompass = args.getBoolean(2);
+            }
+        }
+    }
+
+    @Override
     public void receiveCommand(@NonNull FrameLayout root, String commandId, @Nullable ReadableArray args) {
         super.receiveCommand(root, commandId, args);
         assert args != null;
