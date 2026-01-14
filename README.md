@@ -13,7 +13,7 @@ Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/refe
 The MapsIndoors SDK requires iOS 15.6, so make sure that your podfile is configured for iOS 15.6
 
 ```pod
-platform :ios, '15.6
+platform :ios, '15.6'
 ```
 
 #### Providing API key
