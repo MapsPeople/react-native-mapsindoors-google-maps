@@ -67,7 +67,7 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
     }
 
     @Override
-    public void receiveCommand(@NonNull MapView root, int commandId, @Nullable ReadableArray args) {
+    public void receiveCommand(@NonNull FrameLayout root, int commandId, @Nullable ReadableArray args) {
         super.receiveCommand(root, commandId, args);
         assert args != null;
         int reactNativeViewId = args.getInt(0);
