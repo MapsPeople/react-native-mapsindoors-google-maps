@@ -1,4 +1,4 @@
-const {
+  const {
     withProjectBuildGradle,
     withStringsXml,
     withAndroidManifest,
@@ -7,6 +7,7 @@ const {
     withDangerousMod,
     AndroidConfig,
   } = require("@expo/config-plugins");
+  const { mergeContents } = require("@expo/config-plugins/build/utils/generateCode");
   
   const path = require("path");
   const fs = require("fs");
@@ -77,17 +78,38 @@ const {
   const withGoogleMapIOSSetup = (apiKey) => (config) => {
     return withAppDelegate(config, (modConf) => {
       let contents = modConf.modResults.contents;
-  
-      contents = contents.replace(
-        `#import "AppDelegate.h"`,
-        `#import "AppDelegate.h"\n\n#import "GoogleMaps/GoogleMaps.h"`
-      );
-  
-      contents = contents.replace(
-        `self.moduleName = @"main";`,
-        `[GMSServices provideAPIKey:@"${apiKey}"];\n\nself.moduleName = @"main";`
-      );
-  
+
+      if (modConf.modResults.language === "swift") {
+        contents = mergeContents({
+          tag: "mapsindoors-googlemaps-import",
+          src: contents,
+          newSrc: "#if canImport(GoogleMaps)\nimport GoogleMaps\n#endif",
+          anchor: /(@main|@UIApplicationMain)/,
+          offset: 0,
+          comment: "//",
+        }).contents;
+
+        contents = mergeContents({
+          tag: "mapsindoors-googlemaps-init",
+          src: contents,
+          newSrc: `#if canImport(GoogleMaps)\nGMSServices.provideAPIKey("${apiKey}")\n#endif`,
+          anchor:
+            /\bsuper\.application\(\w+?, didFinishLaunchingWithOptions: \w+?\)/,
+          offset: 0,
+          comment: "//",
+        }).contents;
+      } else {
+        contents = contents.replace(
+          `#import "AppDelegate.h"`,
+          `#import "AppDelegate.h"\n\n#import "GoogleMaps/GoogleMaps.h"`
+        );
+
+        contents = contents.replace(
+          `self.moduleName = @"main";`,
+          `[GMSServices provideAPIKey:@"${apiKey}"];\n\nself.moduleName = @"main";`
+        );
+      }
+
       modConf.modResults.contents = contents;
       return modConf;
     });
