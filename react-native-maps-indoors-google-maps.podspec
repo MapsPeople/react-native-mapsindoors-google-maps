@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   # embeds the resulting dynamic frameworks into the app bundle, so the app builds and links but
   # dies at launch with `Library not loaded: @rpath/MapsIndoorsCore.framework/MapsIndoorsCore`.
   # See SPEX-2429 before reintroducing SPM here.
-  s.dependency "MapsIndoorsGoogleMaps", "4.19.1"
-  s.dependency "MapsIndoorsCodable", "4.19.1"
+  s.dependency "MapsIndoorsGoogleMaps", "4.20.0"
+  s.dependency "MapsIndoorsCodable", "4.20.0"
 end
 
