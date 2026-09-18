@@ -11,6 +11,8 @@ import com.facebook.react.module.model.ReactModuleInfoProvider;
 import com.facebook.react.uimanager.ViewManager;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.mapsindoors.googlemaps.MPGoogleBaseMapCacheProvider;
+import com.mapsindoorsrn.core.BaseMapCacheProviders;
 import com.mapsindoorsrn.core.DirectionsRendererModule;
 import com.mapsindoorsrn.core.DirectionsServiceModule;
 import com.mapsindoorsrn.core.MPDisplayRuleModule;
@@ -26,6 +28,13 @@ import java.util.Map;
 public class MapsIndoorsPackage extends TurboReactPackage implements OnMapReadyCallback {
     private volatile MapControlModule mapControlModule;
     private MapsIndoorsViewManager viewManager;
+
+    public MapsIndoorsPackage() {
+        // Google Maps has no per-region offline tile API, so this provider caches nothing and reports
+        // MIError.BASEMAP_CACHE_NOT_SUPPORTED. Registered anyway so that a base-map caching call on a
+        // Google Maps build learns why nothing happened, instead of failing as unregistered.
+        BaseMapCacheProviders.setFactory(MPGoogleBaseMapCacheProvider::new);
+    }
 
     private MapControlModule getOrCreateMapControlModule(ReactApplicationContext context) {
         if (mapControlModule == null) {
