@@ -28,6 +28,8 @@ import java.util.Map;
 public class MapsIndoorsPackage extends TurboReactPackage implements OnMapReadyCallback {
     private volatile MapControlModule mapControlModule;
     private MapsIndoorsViewManager viewManager;
+    // The view handed to MapControlModule. UI thread only.
+    @Nullable private GoogleMapView mapView;
 
     public MapsIndoorsPackage() {
         // Google Maps has no per-region offline tile API, so this provider caches nothing and reports
@@ -98,13 +100,20 @@ public class MapsIndoorsPackage extends TurboReactPackage implements OnMapReadyC
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
         viewManager = new MapsIndoorsViewManager(reactContext, this);
+        viewManager.setOnViewDroppedListener(view -> {
+            if (mapControlModule != null && mapView != null && mapView.getView() == view) {
+                mapControlModule.onViewDropped(mapView);
+                mapView = null;
+            }
+        });
         return Collections.singletonList(viewManager);
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         if (mapControlModule != null && viewManager != null) {
-            mapControlModule.setView(new GoogleMapView(googleMap, viewManager.getView()));
+            mapView = new GoogleMapView(googleMap, viewManager.getView());
+            mapControlModule.setView(mapView);
         }
     }
 }
