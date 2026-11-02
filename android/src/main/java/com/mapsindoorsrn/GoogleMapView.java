@@ -28,6 +28,10 @@ public class GoogleMapView implements RCMapView {
         mView = view;
     }
 
+    View getView() {
+        return mView;
+    }
+
     @Override
     public void animateCamera(MPCameraUpdate cameraUpdate, Integer duration, OnResultReadyListener onFinished) {
         CameraUpdate update = toCameraOptions(cameraUpdate);

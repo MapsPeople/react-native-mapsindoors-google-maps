@@ -59,10 +59,19 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
     // illusion of a GC safety net.
     private final Map<FrameLayout, MapViewLifecycle> mapLifecycles = new HashMap<>();
 
+    // setupLayout's frame callback re-posts itself every frame, so the Choreographer would keep it, and
+    // the view it lays out, alive for good. Tracked per view so onDropViewInstance can stop it (SPEX-2885).
+    private final Map<View, Choreographer.FrameCallback> layoutCallbacks = new HashMap<>();
+
+    interface OnViewDroppedListener {
+        void onViewDropped(FrameLayout view);
+    }
+
     private Gson gson = new Gson();
 
     ReactApplicationContext mReactContext;
     OnMapReadyCallback mOnMapReadyCallback;
+    @Nullable OnViewDroppedListener mOnViewDroppedListener;
 
     public MapsIndoorsViewManager(ReactApplicationContext reactContext, OnMapReadyCallback onMapReadyCallback) {
         mReactContext = reactContext;
@@ -104,6 +113,10 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
                 // no-op
             }
         });
+    }
+
+    void setOnViewDroppedListener(@Nullable OnViewDroppedListener listener) {
+        mOnViewDroppedListener = listener;
     }
 
     private void setHostResumedOnAll(boolean hostResumed) {
@@ -233,6 +246,14 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
     @Override
     public void onDropViewInstance(@NonNull FrameLayout view) {
         super.onDropViewInstance(view);
+        Choreographer.FrameCallback layoutCallback = layoutCallbacks.remove(view);
+        if (layoutCallback != null) {
+            Choreographer.getInstance().removeFrameCallback(layoutCallback);
+        }
+        // Before the map is destroyed, so its MapControl can still tear down against it.
+        if (mOnViewDroppedListener != null) {
+            mOnViewDroppedListener.onViewDropped(view);
+        }
         MapViewLifecycle lifecycle = mapLifecycles.remove(view);
         if (lifecycle != null) {
             lifecycle.destroy();
@@ -330,14 +351,19 @@ public class MapsIndoorsViewManager extends ViewGroupManager<FrameLayout> {
     }
 
     public void setupLayout(View view) {
-        Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
+        Choreographer.FrameCallback layoutCallback = new Choreographer.FrameCallback() {
             @Override
             public void doFrame(long frameTimeNanos) {
                 manuallyLayoutChildren(view);
                 view.getViewTreeObserver().dispatchOnGlobalLayout();
                 Choreographer.getInstance().postFrameCallback(this);
             }
-        });
+        };
+        Choreographer.FrameCallback previous = layoutCallbacks.put(view, layoutCallback);
+        if (previous != null) {
+            Choreographer.getInstance().removeFrameCallback(previous);
+        }
+        Choreographer.getInstance().postFrameCallback(layoutCallback);
     }
 
     /**

@@ -2,11 +2,45 @@
 
 ## Documentation
 
-Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.9.1/index.html) to get an overview of what the MapsIndoors SDK offers.
+Visit [our reference document site](https://app.mapsindoors.com/mapsindoors/reference/react-native/google-maps/2.10.0/index.html) to get an overview of what the MapsIndoors SDK offers.
 
 ## Changelog
 
-### [2.9.1] - 2026-10-15
+### [2.10.0] - 2026-11-02
+
+#### Added
+
+- MapsIndoors Insights now attributes sessions from this package to its own component -
+  `React Native/android SDK` or `React Native/iOS SDK`, with the package's published version -
+  instead of reporting them as the plain native SDK. The version travels on `MapsIndoors.load`,
+  which is when the native SDK starts the session and snapshots the component, so the first session
+  after a cold start is attributed too
+
+#### Changed
+
+- `MapControl.getCurrentFloorIndex`, `getCurrentMapsIndoorsZoom`, `isFloorSelectorHidden` and
+  `isUserPositionShown` reject when there is no map control. iOS resolved `null`, which reads as a
+  real floor index, zoom or `false`; Android crashed
+
+#### Fixed
+
+- On iOS, the blue dot now shows for a JavaScript position provider whose results leave out
+  `floorIndex`. Every such update was rejected, silently
+- On iOS, the blue dot now shows for a position provider set after calling `MapsIndoors.load` again
+  while the map stays mounted
+- Opening and closing a map no longer leaks memory on every visit. On iOS, setting a position
+  provider kept the map alive in a retain cycle. On Android, the map's `MapControl` was never
+  destroyed and a layout callback kept running for good, so each map stayed in memory; the
+  `MapControl` is now destroyed with its map view. Without one, Android `MapControl` calls now
+  reject, resolve `null` or do nothing, as on iOS, instead of crashing
+- On Android, `MapControl.clearFilter`, `clearHighlight` and `showUserPosition` resolve when there is
+  no map control, instead of never settling
+- MapsIndoors Insights `directions_started` and `directions_completed` events now carry the
+  route's origin and destination location and venue, as from native apps. Requires a route
+  `MPDirectionsService.getRoute` returned since the last `MapsIndoors.load`, among the ten most
+  recently used; a copy made through JSON qualifies, an edited route does not
+
+### [2.9.1] - 2026-10-16
 
 #### Changed
 
